@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List App</title>
+</head>
+<body>
+
+<h1>To-Do List</h1>
+
+<input type="text" id="taskInput" placeholder="Add new task">
+<button onclick="addTask()">Add</button>
+
+<ul id="taskList">
+</ul>
+
+<script>
+// Function to add a new task
+function addTask() {
+  // Get the task input value
+  var taskInput = document.getElementById("taskInput");
+  var taskText = taskInput.value;
+
+  // Check if the input is not empty
+  if (taskText !== '') {
+    // Create a new list item
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(taskText));
+
+    // Add buttons for completing and deleting tasks
+    var completeButton = document.createElement("button");
+    completeButton.appendChild(document.createTextNode("Complete"));
+    completeButton.onclick = function() {
+      completeTask(li);
+    };
+    li.appendChild(completeButton);
+
+    var deleteButton = document.createElement("button");
+    deleteButton.appendChild(document.createTextNode("Delete"));
+    deleteButton.onclick = function() {
+      deleteTask(li);
+    };
+    li.appendChild(deleteButton);
+
+    // Add the new task to the task list
+    document.getElementById("taskList").appendChild(li);
+
+    // Clear the input field after adding the task
+    taskInput.value = '';
+  } else {
+    alert("Please enter a task!");
+  }
+}
+
+// Function to mark a task as complete
+function completeTask(task) {
+  task.classList.toggle("completed");
+}
+
+// Function to delete a task
+function deleteTask(task) {
+  task.remove();
+}
+</script>
+
+<style>
+.completed {
+  text-decoration: line-through;
+}
+</style>
+
+</body>
+</html>
